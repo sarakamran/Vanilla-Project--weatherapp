@@ -13,25 +13,35 @@
 
 <body>
   <div class="container">
-    <div class="weather-app">
-      <h1>NewYork</h1>
-      <ul>
-        <li>Friday 05:00</li>
-        <li>Clear</li>
-      </ul>
-      <div class="row">
-        <div class="col-6">
-          <img src="https://ssl.gstatic.com/onebox/weather/64/sunny_s_cloudy.png" alt="sunny" />
-          12°C| °F
-        </div>
-        <div class="col-6">
+    <div class="weather-app-wrapper">
+      <div class="weather-app">
+        <div class="overview">
+          <h1>NewYork</h1>
           <ul>
-            <li>Precipitation: 2%</li>
-            <li>Humidity: 91%</li>
-            <li>Wind: 8 km/h</li>
-
+            <li>Friday 05:00</li>
+            <li>Clear</li>
           </ul>
         </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="clearfix weather-temperature">
+              <img src="https://ssl.gstatic.com/onebox/weather/48/sunny.png" alt="sunny" class="float-left" />
+              <span class="float-left">
+                <strong>12</strong>
+                <span class="units"><small> °C| °F</small></span>
+              </span>
+            </div>
+          </div>
+          <div class="col-6">
+            <ul>
+              <li>Precipitation: 2%</li>
+              <li>Humidity: 91%</li>
+              <li>Wind: 8 km/h</li>
+
+            </ul>
+          </div>
+        </div>
+
       </div>
       <small>
         <a href="https://github.com/sarakamran/Vanilla-Project--weatherapp">Open-source code</a>, by Sara Kamran
