@@ -1,6 +1,27 @@
-function displayWeatherCondition(response) {
-  console.log(response.data.main);
+function formatData(timestamp) {
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`; //"0".concat(hours);
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`; //"0".concat(minutes);
+  }
+  let day = days[date.getDay()];
+  return `${day} ${hours}:${minutes}`;
+}
 
+function displayWeatherCondition(response) {
   document.querySelector("#city").innerHTML = response.data.name;
   document.querySelector("#temperature").innerHTML = Math.round(
     response.data.main.temp
@@ -11,19 +32,20 @@ function displayWeatherCondition(response) {
   );
   document.querySelector("#description").innerHTML =
     response.data.weather[0].description;
-
-
-
-
-
-  let tempElement=document.querySelector("#temperature");
-  tempElement.innerHTML=Math.round(response.data.main.temp);
-  let cityElement = document.querySelector("#city");
-  cityElement.innerHTML = response.data.name;
+  document.querySelector("#date").innerHTML = formatData(
+    response.data.dt * 1000
+  );
+  document
+    .querySelector("#icon")
+    .setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
 }
 var apiKey = "6a48a550fc04f170639e60d52b8a6bc5";
+let city = "Paris";
 var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q="
-  .concat("New York", "&appid=")
+  .concat(city, "&appid=")
   .concat(apiKey, "&units=metric");
 axios.get(apiUrl).then(displayWeatherCondition);
 /*function formatDate(date) {
