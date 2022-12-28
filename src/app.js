@@ -23,9 +23,9 @@ function formatData(timestamp) {
 
 function displayWeatherCondition(response) {
   document.querySelector("#city").innerHTML = response.data.name;
-  document.querySelector("#temperature").innerHTML = Math.round(
-    response.data.main.temp
-  );
+  celsiusTemp = Math.round(response.data.main.temp);
+  document.querySelector("#temperature").innerHTML = celsiusTemp;
+
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   document.querySelector("#wind").innerHTML = Math.round(
     response.data.wind.speed
@@ -55,9 +55,32 @@ function handleSubmit(event) {
   console.log(cityInputElement.value);
   search(cityInputElement.value);
 }
-search("Tehran");
+function showFahrenheitTemperature(event) {
+  event.preventDefault();
+  let tempElement = document.querySelector("#temperature");
+  celsiusLinkElement.classList.remove("active");
+  fahrenheitLinkElement.classList.add("active");
+  tempElement.innerHTML = Math.round((celsiusTemp * 9) / 5 + 32);
+}
+function showCelsiusTemperature(event) {
+  event.preventDefault();
+  celsiusLinkElement.classList.add("active");
+  fahrenheitLinkElement.classList.remove("active");
+  let tempElement = document.querySelector("#temperature");
+  tempElement.innerHTML = celsiusTemp;
+}
+
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", handleSubmit);
+
+let celsiusTemp = null;
+let fahrenheitLinkElement = document.querySelector("#fahrenheit-link");
+fahrenheitLinkElement.addEventListener("click", showFahrenheitTemperature);
+
+let celsiusLinkElement = document.querySelector("#celsius-link");
+celsiusLinkElement.addEventListener("click", showCelsiusTemperature);
+
+search("Tehran");
 
 /*function formatDate(date) {
   let hours = date.getHours();
