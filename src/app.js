@@ -1,4 +1,32 @@
-function formatDate(date) {
+function displayWeatherCondition(response) {
+  console.log(response.data.main);
+
+  document.querySelector("#city").innerHTML = response.data.name;
+  document.querySelector("#temperature").innerHTML = Math.round(
+    response.data.main.temp
+  );
+  document.querySelector("#humidity").innerHTML = response.data.main.humidity;
+  document.querySelector("#wind").innerHTML = Math.round(
+    response.data.wind.speed
+  );
+  document.querySelector("#description").innerHTML =
+    response.data.weather[0].description;
+
+
+
+
+
+  let tempElement=document.querySelector("#temperature");
+  tempElement.innerHTML=Math.round(response.data.main.temp);
+  let cityElement = document.querySelector("#city");
+  cityElement.innerHTML = response.data.name;
+}
+var apiKey = "6a48a550fc04f170639e60d52b8a6bc5";
+var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q="
+  .concat("New York", "&appid=")
+  .concat(apiKey, "&units=metric");
+axios.get(apiUrl).then(displayWeatherCondition);
+/*function formatDate(date) {
   let hours = date.getHours();
 
   if (hours < 10) {
@@ -76,3 +104,4 @@ searchForm.addEventListener("submit", handleSubmit);
 var currentLocationBut = document.querySelector("#current-location-button");
 currentLocationBut.addEventListener("click", getCurrentLocation);
 searchCity("New York");
+*/
