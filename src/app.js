@@ -42,12 +42,23 @@ function displayWeatherCondition(response) {
       `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
     );
 }
-var apiKey = "6a48a550fc04f170639e60d52b8a6bc5";
-let city = "Paris";
-var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q="
-  .concat(city, "&appid=")
-  .concat(apiKey, "&units=metric");
-axios.get(apiUrl).then(displayWeatherCondition);
+function search(city) {
+  let apiKey = "6a48a550fc04f170639e60d52b8a6bc5";
+  let apiUrl = "https://api.openweathermap.org/data/2.5/weather?q="
+    .concat(city, "&appid=")
+    .concat(apiKey, "&units=metric");
+  axios.get(apiUrl).then(displayWeatherCondition);
+}
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#city-input");
+  console.log(cityInputElement.value);
+  search(cityInputElement.value);
+}
+search("Tehran");
+let searchForm = document.querySelector("#search-form");
+searchForm.addEventListener("submit", handleSubmit);
+
 /*function formatDate(date) {
   let hours = date.getHours();
 
